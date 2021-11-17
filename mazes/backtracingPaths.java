@@ -1,6 +1,7 @@
 import java.util.* ;
 
-//  
+//      https://github.com/nishant-out/Problms/blob/main/Written_ref/WhatsApp%20Image%202021-11-17%20at%2018.23.10.jpeg
+//	https://github.com/nishant-out/Problms/blob/main/Written_ref/WhatsApp%20Image%202021-11-17%20at%2018.23.10%20(1).jpeg
 
 public class Main{
 	public static void main(String[] args) {
