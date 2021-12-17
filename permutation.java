@@ -7,6 +7,28 @@ public class Main{
 	    ArrayList<String> ans = permutation( "", str ) ;
 	    System.out.println( ans );
 	}
+	
+	//	Better Approach:
+	public static ArrayList<String> better_permutation( String ans, String s ){
+	    if( s.isEmpty() ){
+	        ArrayList<String> list = new ArrayList<>() ;
+	        list.add( ans ) ;
+
+	        return list ;
+	    }
+	    ArrayList<String> ret = new ArrayList<>() ;
+	    
+	    for( int i = 0; i < s.length(); i++ ){
+	        char ch = s.charAt( i ) ;
+	        
+	        String prev = s.substring( 0, i ) ;
+	        String end  = s.substring( i +1, s.length()) ;
+	        
+	        ret.addAll( better_permutation( ans +ch, prev +end )) ;
+	    }
+	    return ret ;
+	}
+	
 	public static ArrayList<String> permutation( String ans, String s ){
 	    if( s.isEmpty() ){
 	        ArrayList<String> list = new ArrayList<>() ;
