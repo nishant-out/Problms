@@ -23,31 +23,44 @@ public class Main{
 	
 	public static boolean solve( int[][] board ){
 	    
+	    int row = -1 ;
+	    int col = -1 ;
+	    boolean empty = false ;
+	    
 	    for ( int i = 0; i < board.length; i++ ) {
-	        
-	        int numb = 1 ;
 	        for ( int j = 0; j < board.length; j++ ){
 	            
 	            if( board[ i ][ j ] == 0 ){
-	                if ( isSafe( board, i, j, numb ) ){
 	                
-    	                board[ i ][ j ] = numb ;
-    	                if ( solve( board ) )
-    	                    return true ;
-    	                else {
-    	                    numb++ ;
-    	                    board[ i ][ j ] = 0 ;
-    	                }
-	                }
-	                else
-	                    numb++ ;
+	                row = i ;
+	                col = i ;
+	                empty = true ;
 	            }
 	        }
+	        if( empty )
+	            break ;
+	    }
+	    
+	    if( !empty )    //  Solved
+	        return true ;
+	        
+	    
+	    for ( int numb = 1; numb <= 9; numb++ ) {
+
+	       if ( isSafe( board, row, col, numb ) )
+	                
+    	       board[ row ][ col ] = numb ;
+    	       if ( solve( board ) )
+    	           return true ;
+    	       else {
+    	           board[ row ][ col ] = 0 ;
+    	       }
+	   }
+	   
     	    //  Checks if sudoku is correct
     	   // if ( i == 8 && isCorrect( board, 1 ) )
-    	   //     return true ;
-	    }
-	    return isCorrect( board, 1 ) ;
+    	   //     return true 
+	    return false ;
 	}
 	
 	public static boolean isSafe( int[][] board, int row, int col, int numb ){
@@ -118,8 +131,7 @@ public class Main{
 	    return isCorrect( board, val +1 ) ;
 	}
 	
-	public static void print2D(int mat[][])
-    {
+	public static void print2D(int mat[][]) {
         // Loop through all rows
         for (int[] row : mat)
  
