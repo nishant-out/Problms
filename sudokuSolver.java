@@ -2,7 +2,7 @@ import java.util.Arrays ;
 public class Main{
 	public static void main(String[] args) {
 	    int[][] board = new int[][] {
-	            {3, 0, 6, 5, 0, 8, 4, 0, 0},
+	        {3, 0, 6, 5, 0, 8, 4, 0, 0},
                 {5, 2, 0, 0, 0, 0, 0, 0, 0},
                 {0, 8, 7, 0, 0, 0, 0, 3, 1},
                 {0, 0, 3, 0, 1, 0, 0, 8, 0},
@@ -12,13 +12,13 @@ public class Main{
                 {0, 0, 0, 0, 0, 0, 0, 7, 4},
                 {0, 0, 5, 2, 0, 6, 3, 0, 0}
 	    } ;
-	    print2D( board );
+// 	    print2D( board );
 	    System.out.println();
 	    if( solve( board ) )
-		    print2D( board );
+		print2D( board );
 		
-		else 
-		    System.out.println( "Unsolvable" );
+	    else 
+		System.out.println( "Unsolvable" );
 	}
 	
 	public static boolean solve( int[][] board ){
@@ -33,8 +33,9 @@ public class Main{
 	            if( board[ i ][ j ] == 0 ){
 	                
 	                row = i ;
-	                col = i ;
+	                col = j ;
 	                empty = true ;
+	                break ;
 	            }
 	        }
 	        if( empty )
@@ -47,18 +48,18 @@ public class Main{
 	    
 	    for ( int numb = 1; numb <= 9; numb++ ) {
 
-	       if ( isSafe( board, row, col, numb ) )
+	       if ( isSafe( board, row, col, numb ) ){
 	                
-    	       board[ row ][ col ] = numb ;
-    	       if ( solve( board ) )
-    	           return true ;
-    	       else {
-    	           board[ row ][ col ] = 0 ;
-    	       }
-	   }
-	   
-    	    //  Checks if sudoku is correct
-    	   // if ( i == 8 && isCorrect( board, 1 ) )
+		       board[ row ][ col ] = numb ;
+		       if ( solve( board ) ){
+			   return true ;
+		       }
+		       else {
+			   board[ row ][ col ] = 0 ;
+		       }
+	       }
+	    }
+		
     	   //     return true 
 	    return false ;
 	}
@@ -92,43 +93,6 @@ public class Main{
 	    }
 	    
 	    return true ;
-	}
-	
-	public static boolean isCorrect( int[][] board, int val ){
-	    if( val > 9 )
-	        return true ;
-	    
-	    int freq = 0 ;
-	    
-	    //  Check if all rows are correct
-	    for ( int i = 0; i < board.length; i++ ) {
-	        freq = 0 ;
-	        for ( int j = 0; j < board.length; j++ ){
-	            if( board[ i ][ j ] == 0 )
-	                return false ;
-	            
-	            if( val == board[ i ][ j ] )
-	                freq ++ ;
-	        }
-	        if( freq > 1 )
-	            return false ;
-	    }
-	    
-	    //  Check if all cols are correct
-	    for ( int i = 0; i < board.length; i++ ) {
-	        freq = 0 ;
-	        for ( int j = 0; j < board.length; j++ ){
-	            if( board[ j ][ i ] == 0 )
-	                return false ;
-	            
-	            if( val == board[ j ][ i ] )
-	                freq ++ ;
-	        }
-	        if( freq > 1 )
-	            return false ;
-	    }
-	    
-	    return isCorrect( board, val +1 ) ;
 	}
 	
 	public static void print2D(int mat[][]) {
